@@ -1,16 +1,12 @@
-# A Simple Local Development Environment for CSS Development Using Semantic-Ui
+# A Docker Image for CSS Development Using Semantic-UI
 
-I would like to use [semantic-ui](https://semantic-ui.com/) in my project.
+You may not want to install Nodejs just for CSS development with [semantic-ui](https://semantic-ui.com/). This simple Docker image is all you need.
 
-What I need are
+Features of this image are:
 
-1. don't want install nodejs locally
+1. no need to install nodejs locally
 
 2. install semantic-ui locally
-  
-3. browser should automatically refresh when HTML, CSS and Javascript files change
-
-The first two requirements can be fulfilled easily by using Docker.
 
 The Dockerfile to create the image is:
 
@@ -22,7 +18,7 @@ RUN mkdir /app
 WORKDIR /app
 ```
 
-Build the image with a tag semantic-ui.
+Build the image with a appropriate tag. The tag used here is `semantic-ui`.
 
 The command to run the container is:
 
@@ -33,14 +29,16 @@ docker run -it --rm \
 semantic-ui /bin/sh
 ```
 
-This shell script mount the current working directory to /app in the container, and login into the container as the same user in the same group in the host.
+This shell script mount the current working directory to `/app` in the container, and login into the container as the same user in the same group in the host to prevent from permission issues.
 
-Run the [installation command](https://semantic-ui.com/introduction/getting-started.html) to install semantic-ui.
+Run the [installation command](https://semantic-ui.com/introduction/getting-started.html) to install semantic-ui, after get in the container.
 
-Using browser-sync to fulfill the third requirement is easy. Please read [A Very Basic Browser-Sync Development Environment Based on Docker](https://medium.com/@acncuc/a-very-basic-browser-sync-development-environment-based-on-docker-568e7a0c8c0f?source=friends_link&sk=14dd350203d90b19e51d3ee6be09f840) for more detail.
+For automatically refreshing pages during development, please read [A Very Basic Browser-Sync Development Environment Based on Docker](https://medium.com/@acncuc/a-very-basic-browser-sync-development-environment-based-on-docker-568e7a0c8c0f?source=friends_link&sk=14dd350203d90b19e51d3ee6be09f840) for more detail.
 
-However there is one important point. You may run into an error cast by browser-sync that says the number of watched files exceeds the limit. The solution is to tell browser-sync to ignore directories where too many files resides.
+There is one important point. You may run into an error cast by browser-sync that says _the number of watched files exceeds the limit_. The solution is to tell browser-sync to ignore directories where too many files resides.
+
 An example shell script is:
+
 ```shell
 docker run -it --rm \
 -v $(pwd):/app \
@@ -48,8 +46,11 @@ docker run -it --rm \
 browser-sync \
 browser-sync start \
 --server \
---files \"*.html, *.js, *.css,css/*.css, js/*.js\" \
+--files \"*.html, *.js, *.css, css/*.css, js/*.js\" \
 --ignore 'semantic' 'node_modules' \
 --no-open false
 ```
+
 Don't need to escape the single quotes after the --ignore option. This took me an hour to fix. :).
+
+If you want to use an alias to run the script, please prepends a back slash `/` to `$(pwd)`. That is `\$(pwd)`.
