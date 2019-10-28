@@ -57,7 +57,7 @@ As explained in [official document](https://semantic-ui.com/elements/segment.htm
 
 ### Custom CSS code for layout
 
-There is custom-written CSS code inside `<style>` tag. Most is for formatting text, color, and space, etc. It is not explained here. However, two points are worthy of mention. The first one is:
+There is custom-written CSS code inside `<style>` tag. Most is for formatting text, color, and space, etc. It is not explained here. However, two points are worthy of mention. The first one (denoted here as Rule 1 for convenience) is:
 
 ```CSS
 .ui.inverted.vertical.segment {
@@ -66,9 +66,9 @@ There is custom-written CSS code inside `<style>` tag. Most is for formatting te
 }
 ```
 
-The above code first selects the outer-most element that encompass all other elements. This block element, by default, takes up all width of the viewport. __The code then sets this outer-most element to take up all the height of the viewport.__ In addition, when you type these code, you can find that the height of the `<footer>` is the same as the height of the outer-most element. **The selector selects both the outer-most element and the `<footer>` element.** You can find an undesired scroll bar beside the page.
+Rule 1 selects the outer-most element that encompass all other elements. This block element, by default, takes up all width of the viewport. __The code then sets this outer-most element to take up all the height of the viewport.__ In addition, when you type these code, you can find that the height of the `<footer>` is the same as the height of the outer-most element. **The selector selects both the outer-most element and the `<footer>` element.** You can find an undesired scroll bar beside the page.
 
-The second one is:
+The second one (denoted as Rule 2) is:
 
 ```CSS
 .ui.inverted.vertical.segment footer.ui.segment {
@@ -82,19 +82,14 @@ The second one is:
 
 This instruction fixes the `footer` element at the bottom of the page. Since this instruction appears after the above instruction, it overwrites the height of the `<footer>` element. That is [cascade](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance). :) The layout seems perfect.
 
-### A trap lurks in margin collapsing
+### A stupid mistake I made
 
-Add only the above four lines of CSS code to  `<style>` tag. You can find that a scroll bar appears. This is not the expected behavior. According to the above CSS code, the height of the outer-most element should exactly equal to, but not exceed the height of the viewport.
+Add Rule 1 only to  `<style>` tag. You can find that a scroll bar appears. This is not the expected behavior. At first, I thought it is caused by [margin collapsing](https://www.bennadel.com/blog/3391-margin-collapsing-causes-unexpected-scrollbar-with-100vh-body-in-webkit.htm). However, it is NOT. It is just because the Rule 1 selects both the outer-most element and the `<footer>` element. Next time I will check the selector more carefully.
 
-I Googled and then found the cause might be [margin collapsing](https://www.bennadel.com/blog/3391-margin-collapsing-causes-unexpected-scrollbar-with-100vh-body-in-webkit.htm). Detail of margin collapsing can be found [here](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing).
+### A trivial rewriting
 
-
-
-
-margin collapsing cause unexpected scrollbar
-
-footer is the cause.
-
+Rule 1 selects multiple elements. I think it is better to make Rule 1 apply only to the outer-most element, since only the outer-most element has to take up all height of the viewport.
+ 
 Features of the [Cover](https://semantic-ui-forest.com/templates/bootstrap/cover) template are:
 
 - A full page design
