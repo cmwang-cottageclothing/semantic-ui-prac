@@ -88,8 +88,31 @@ Add Rule 1 only to  `<style>` tag. You can find that a scroll bar appears. This 
 
 ### A trivial rewriting
 
-Rule 1 selects multiple elements. I think it is better to make Rule 1 apply only to the outer-most element, since only the outer-most element has to take up all height of the viewport.
- 
+Rule 1 selects multiple elements. I think it is better to make Rule 1 apply only to the outer-most element, since only the outer-most element has to take up all height of the viewport. Rewrite Rule 1 as follows:
+
+```CSS
+div.ui.inverted.vertical.segment {
+    height: 100vh;
+    background-color: rgb(51, 51, 51);
+}
+```
+
+Add `div` to the Rule 1 selector part. You can have various ways to do this, such as using a ID selector. The point is to apply Rule 1 only to the the outer-most element. I think it now more semantically clear.
+
+Rule 2 is rewritten as:
+
+```CSS
+.ui.inverted.vertical.segment footer.ui.segment {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    color: gray;
+    background-color: rgb(51, 51, 51);
+}
+```
+
+ However, the background color has to be explicitly
+
 Features of the [Cover](https://semantic-ui-forest.com/templates/bootstrap/cover) template are:
 
 - A full page design
