@@ -1,8 +1,6 @@
-# Anatomy of a Smantic-UI example page Cover
+# Anatomy of a Semantic-UI Template: [Cover](https://semantic-ui-forest.com/templates/bootstrap/cover)
 
 ## My way to learn Semantic-UI: Part I
-
-## Part I
 
 The official document of [Semantic-UI](https://semantic-ui.com/) says little about learning how to use Semantic-UI. Examples are given, but they are code only. None of them are described in detail.
 
@@ -10,13 +8,13 @@ I usually learn programming language by examples. Not only read the example code
 
 The first example I want to learn is [Cover](https://semantic-ui-forest.com/templates/bootstrap/cover) template. You can find the [source code here](https://github.com/semantic-ui-forest/forest-templates/tree/master/bootstrap/cover). To examine the effect of every single line of the CSS code, you can use this [convenient tool](https://medium.com/@acncuc/a-very-basic-browser-sync-development-environment-based-on-docker-568e7a0c8c0f?source=friends_link&sk=14dd350203d90b19e51d3ee6be09f840).
 
-First, I remove all the CSS code to get a semantically meaningful HTML file. THe HTML code can be roughly divided into three parts. They are a navigation bar, main content, and a footer, respectively. This plain HTML file is cover-plain.html.
+First, I remove all the CSS code to get a semantically meaningful HTML file. THe HTML code can be roughly divided into three parts. They are a navigation bar, main content, and a footer, respectively. This plain HTML file is [cover-plain.html](https://github.com/cmwang-cottageclothing/semantic-ui-prac/blob/master/cover/cover-plain.html).
 
 Next, I, one by one, add CSS classes, which are provided by [Semantic-UI](https://semantic-ui.com/), to each element. You can see the effect of every class by using this [convenient tool](https://medium.com/@acncuc/a-very-basic-browser-sync-development-environment-based-on-docker-568e7a0c8c0f?source=friends_link&sk=14dd350203d90b19e51d3ee6be09f840).
 
 ## Two important components
 
-Read the cover-plain.html line by line. Two important components are observed. They are `segment` and `menu`.
+Read the [cover-plain.html](https://github.com/cmwang-cottageclothing/semantic-ui-prac/blob/master/cover/cover-plain.html) line by line. Two important components are observed. They are `segment` and `menu`.
 
 ### A vertical segment
 
@@ -34,7 +32,7 @@ What does this mean? I use Developer Tools to examine the the element decorated 
 }
 ```
 
-Applying `"segment"` (this class often applys to a block element) inflicts padding, `margin-top`, and `margin-bottom` to an element. It also sets `position` to `relative`. Then descendent elements can be positioned relative to that element. Therefore, a segment is suitable to contain other elements.
+Applying `"segment"` (this class often applies to a block element) inflicts padding, `margin-top`, and `margin-bottom` to an element. It also sets `position` to `relative`. Then descendant elements can be positioned relative to that element. Therefore, a segment is suitable to contain other elements.
 
 One other important property is:
 
@@ -46,14 +44,14 @@ One other important property is:
 
 It removes bottom margin of the last child element.
 
-A `segment` can be combined with `vertical`.
+A `segment` can be combined with `vertical` as stated:
 > [A vertical segment formats content to be aligned as part of a vertical group](https://semantic-ui.com/elements/segment.html#vertical-segment)
 
 In fact, it will remove margin, left padding, right padding and bottom border for an element.
 
 ### An `inverted` segment
 
-As explained in [official document](https://semantic-ui.com/elements/segment.html#inverted), an `inverted` segment have its colors inverted for contrast. However, this class **does not apply to descendent elements**. It should be added to descendent elements to keep visual consistence. For example, the `<h1>` element in the `<nav>` has to be decorated with `inverted`. Otherwise, the color will not be consistent.
+As explained in [official document](https://semantic-ui.com/elements/segment.html#inverted), an `inverted` segment have its colors inverted for contrast. However, this class **does not apply to descendent elements**. It should be added to descendant elements to keep visual consistence. For example, the `<h1>` element in the `<nav>` has to be decorated with `inverted`. Otherwise, the color will not be consistent.
 
 ### Custom CSS code for layout
 
@@ -66,7 +64,7 @@ There is custom-written CSS code inside `<style>` tag. Most is for formatting te
 }
 ```
 
-Rule 1 selects the outer-most element that encompass all other elements. This block element, by default, takes up all width of the viewport. __The code then sets this outer-most element to take up all the height of the viewport.__ In addition, when you type these code, you can find that the height of the `<footer>` is the same as the height of the outer-most element. **The selector selects both the outer-most element and the `<footer>` element.** You can find an undesired scroll bar beside the page.
+Rule 1 selects the outer-most element that encompass all other elements. This block element, by default, takes up all width of the viewport. __The code then sets this outer-most element to take up all the height of the viewport.__ In addition, when you type these code, you can find that the height of the `<footer>` is the same as the height of the outer-most element. **The selector selects both the outer-most element and the `<footer>` element.** You can thus find an undesired scroll bar beside the page.
 
 The second one (denoted as Rule 2) is:
 
@@ -111,8 +109,10 @@ Rule 2 is rewritten as:
 }
 ```
 
- However, the background color has to be explicitly
+ Now the height of `<footer>` is determined by browser, not by the user. However, the background color has to be explicitly designated in two places. This not a good approach. I guess a better way to set the `background-color` is to use [Theming](https://semantic-ui.com/usage/theming.html). Then you can get a consistent background color.
 
-Features of the [Cover](https://semantic-ui-forest.com/templates/bootstrap/cover) template are:
+### Features of the [Cover](https://semantic-ui-forest.com/templates/bootstrap/cover) template
 
-- A full page design
+Now I can list the features of the [Cover](https://semantic-ui-forest.com/templates/bootstrap/cover) template
+
+This template is a one page design that can be seen in a glimpse. The page occupies all height of the viewport. Users **don't have to scroll down** to read.
